@@ -7,6 +7,4 @@ cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
-arduino_core
-arduino_variant
-cmsis_atmel
+arduino-core/dependencies

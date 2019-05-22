@@ -1,4 +1,24 @@
 #
+# HAL Toolchain
+# ---------------------------------------------------------------------------
+# (c)2019 by Lucky Resistor. See LICENSE for details.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+
+#
 # This CMake toolchain will setup the environment to build for a Feather M0 using the Arduino environment.
 #
 # - The Arduino application version 1.8.9 or later needs to be installed.
@@ -22,6 +42,7 @@ set(ADAFRUIT_SAMD_VERSION "1.4.1")
 set(ARM_GCC_VERSION "4.8.3-2014q1")
 set(CMSIS_VERSION "4.5.0")
 set(CMSIS_ATMEL_VERSION "1.2.0")
+set(BOSSAC_VERSION "1.7.0")
 
 # The path to the arduino application, which contains the required build encironment.
 set(ARDUINO_PATH "/Application/Arduino.app")
@@ -42,7 +63,7 @@ set(INCLUDE_PATHS "${INCLUDE_PATHS} -I${CMSIS_ATMEL_ROOT_PATH}/${MCU_NAME}/inclu
 
 # Collect flags
 set(OPTIMIZATION_FLAGS "-Os")
-set(WARNING_FLAGS "-Wall")
+set(WARNING_FLAGS "-Wall -Wno-unknown-pragmas")
 set(CPU_TARGET_FLAGS "-mcpu=${CPU_TARGET} -m${CPU_INST}")
 set(MORE_FLAGS "-ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500")
 set(CXX_FLAGS "-std=gnu++11 -fno-threadsafe-statics -fno-rtti -fno-exceptions")
@@ -70,10 +91,11 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${INCLUDE_PATHS}")
 set(CMAKE_CXX_COMPILER "${APP_TOOLS_PATH}/arm-none-eabi-g++")
 set(CMAKE_C_COMPILER "${APP_TOOLS_PATH}/arm-none-eabi-gcc")
 set(CMAKE_AR "${APP_TOOLS_PATH}/arm-none-eabi-ar")
-set(TOOL_OBJDUMP "${APP_TOOLS_PATH}/arm-none-eabi-objdump")
+#set(TOOL_OBJDUMP "${APP_TOOLS_PATH}/arm-none-eabi-objdump")
 set(TOOL_OBJCOPY "${APP_TOOLS_PATH}/arm-none-eabi-objcopy")
 set(TOOL_SIZE "${APP_TOOLS_PATH}/arm-none-eabi-size")
-set(TOOL_NM "${APP_TOOLS_PATH}/arm-none-eabi-nm")
+#set(TOOL_NM "${APP_TOOLS_PATH}/arm-none-eabi-nm")
+set(TOOL_BOSSAC "${ARDUINO_TOOLS}/bossac/${BOSSAC_VERSION}/bossac")
 
 # Disable searching the local libraries.
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)

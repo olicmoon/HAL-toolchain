@@ -1,3 +1,23 @@
+#
+# HAL Toolchain
+# ---------------------------------------------------------------------------
+# (c)2019 by Lucky Resistor. See LICENSE for details.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+
 # Set the minimum required version of CMake
 cmake_minimum_required(VERSION 3.14)
 
@@ -14,10 +34,10 @@ if(NOT EXISTS "${arduino_core_dir}")
 endif()
 if(EXISTS "${arduino_core_dir}")
     execute_process(COMMAND "rm" "-f" "${arduino_core_dir}" "${cmsis_atmel_dir}" "${arduino_variant_dir}")
-    execute_process(COMMAND "ln" "-s" "${ARDUINO_CORE}" "${arduino_core_dir}")
-    execute_process(COMMAND "ln" "-s" "${CMSIS_ATMEL_ROOT_PATH}/${MCU_NAME}" "${cmsis_atmel_dir}")
-    execute_process(COMMAND "ln" "-s" "${VARIANT_ROOT_PATH}" "${arduino_variant_dir}")
 endif()
+execute_process(COMMAND "ln" "-s" "${ARDUINO_CORE}" "${arduino_core_dir}")
+execute_process(COMMAND "ln" "-s" "${CMSIS_ATMEL_ROOT_PATH}/${MCU_NAME}" "${cmsis_atmel_dir}")
+execute_process(COMMAND "ln" "-s" "${VARIANT_ROOT_PATH}" "${arduino_variant_dir}")
 
 # Scan for all files.
 file(GLOB_RECURSE ARDUINO_CORE_FILES

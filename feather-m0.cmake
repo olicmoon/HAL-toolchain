@@ -68,7 +68,6 @@ set(CMAKE_C_COMPILER "${APP_TOOLS_PATH}/arm-none-eabi-gcc")
 set(CMAKE_AR "${APP_TOOLS_PATH}/arm-none-eabi-ar")
 set(TOOL_OBJCOPY "${APP_TOOLS_PATH}/arm-none-eabi-objcopy")
 set(TOOL_SIZE "${APP_TOOLS_PATH}/arm-none-eabi-size")
-set(TOOL_BOSSAC "${ARDUINO_TOOLS}/bossac/${BOSSAC_VERSION}/bossac")
 
 # Disable searching the local libraries.
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)

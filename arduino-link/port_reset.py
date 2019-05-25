@@ -19,14 +19,11 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 
-# This script requires Python 3
-
 import os
 import termios
 import time
 import argparse
 import sys
-
 
 assert sys.version_info >= (3, 7)
 
@@ -44,7 +41,8 @@ def reset(port: str):
         # Raw / 8N1
         cflag |= (termios.CLOCAL | termios.CREAD | termios.CS8)
         cflag &= ~(termios.CSIZE | termios.CSTOPB)
-        lflag &= ~(termios.ICANON | termios.ECHO | termios.ECHOE | termios.ECHOK | termios.ECHONL | termios.ISIG | termios.IEXTEN)
+        lflag &= ~(termios.ICANON | termios.ECHO | termios.ECHOE |
+                   termios.ECHOK | termios.ECHONL | termios.ISIG | termios.IEXTEN)
         oflag &= ~(termios.OPOST | termios.ONLCR | termios.OCRNL)
         iflag &= ~(termios.INLCR | termios.IGNCR | termios.ICRNL | termios.IGNBRK | termios.INPCK | termios.ISTRIP)
         # Configure / 1200 baud

@@ -18,42 +18,17 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 
-#
-# This CMake toolchain will setup the environment to build for a Feather M0 using the Arduino environment.
-#
-# - The Arduino application version 1.8.9 or later needs to be installed.
-# - The Adafruit SAMD toolchain version 1.4.1 or later needs to be installed.
-#
-# All configurations in this file are made for maxcOS >= 10.14
-# It should be possible to port everything to other opertating systems.
-#
-# Target MCU: SAMD21G18A
-#
-
 # Set the system name
 set(CMAKE_SYSTEM_NAME Generic)
 
-# The configuration.
-set(MCU_NAME "samd21")
-set(MCU_VARIANT "SAMD21G18A")
-set(CPU_TARGET "cortex-m0plus")
-set(CPU_INST "thumb")
-set(ADAFRUIT_SAMD_VERSION "1.4.1")
-set(ARM_GCC_VERSION "4.8.3-2014q1")
-set(CMSIS_VERSION "4.5.0")
-set(CMSIS_ATMEL_VERSION "1.2.0")
-set(BOSSAC_VERSION "1.7.0")
+# Read the configuration.
+if(NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/feather-m0-config.cmake")
+    message(FATAL_ERROR "Missing configuration! Please run 'python3 configure.py'...")
+endif()
+include("${CMAKE_CURRENT_LIST_DIR}/feather-m0-config.cmake")
 
-# The path to the arduino application, which contains the required build encironment.
-set(ARDUINO_PATH "/Application/Arduino.app")
-set(ARDUINO_JAVA_ROOT "${ARDUINO_PATH}/Contents/Java")
-set(ARDUINO_PKG_ROOT "$ENV{HOME}/Library/Arduino15/packages")
-set(ARDUINO_TOOLS "${ARDUINO_PKG_ROOT}/arduino/tools")
-set(SAMD_BUILD_ROOT "${ARDUINO_PKG_ROOT}/adafruit/hardware/samd/${ADAFRUIT_SAMD_VERSION}")
+# Additional paths
 set(ARDUINO_CORE "${SAMD_BUILD_ROOT}/cores/arduino")
-set(APP_TOOLS_PATH "${ARDUINO_TOOLS}/arm-none-eabi-gcc/${ARM_GCC_VERSION}/bin")
-set(CMSIS_ROOT_PATH "${ARDUINO_TOOLS}/CMSIS/${CMSIS_VERSION}/CMSIS")
-set(CMSIS_ATMEL_ROOT_PATH "${ARDUINO_TOOLS}/CMSIS-Atmel/${CMSIS_ATMEL_VERSION}/CMSIS/Device/ATMEL")
 set(VARIANT_ROOT_PATH "${SAMD_BUILD_ROOT}/variants/feather_m0")
 set(TOOLCHAIN_DIR "${CMAKE_CURRENT_LIST_DIR}")
 
@@ -91,10 +66,8 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${INCLUDE_PATHS}")
 set(CMAKE_CXX_COMPILER "${APP_TOOLS_PATH}/arm-none-eabi-g++")
 set(CMAKE_C_COMPILER "${APP_TOOLS_PATH}/arm-none-eabi-gcc")
 set(CMAKE_AR "${APP_TOOLS_PATH}/arm-none-eabi-ar")
-#set(TOOL_OBJDUMP "${APP_TOOLS_PATH}/arm-none-eabi-objdump")
 set(TOOL_OBJCOPY "${APP_TOOLS_PATH}/arm-none-eabi-objcopy")
 set(TOOL_SIZE "${APP_TOOLS_PATH}/arm-none-eabi-size")
-#set(TOOL_NM "${APP_TOOLS_PATH}/arm-none-eabi-nm")
 set(TOOL_BOSSAC "${ARDUINO_TOOLS}/bossac/${BOSSAC_VERSION}/bossac")
 
 # Disable searching the local libraries.

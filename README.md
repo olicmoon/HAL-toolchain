@@ -27,7 +27,7 @@ Create the build environment:
 ```
 mkdir ~/blink-build
 cd ~/blink-build
-cmake -DCMAKE_TOOLCHAIN_FILE=~/hal-example-fm0-blink/hal-toolchain/feather-m0.cmake
+cmake -DCMAKE_TOOLCHAIN_FILE=~/hal-example-fm0-blink/hal-toolchain/feather-m0.cmake ~/hal-example-fm0-blink
 ```
 
 Build the Firmware

@@ -44,7 +44,5 @@ file(GLOB_RECURSE ARDUINO_CORE_FILES
         "${cmsis_atmel_dir}/source/*.c"
         "${arduino_variant_dir}/*.cpp")
 
-# Create a static library from all this f
+# Create a static library from all this files.
 add_library(arduino-core STATIC ${ARDUINO_CORE_FILES})
-
-

@@ -33,7 +33,9 @@ set(VARIANT_ROOT_PATH "${SAMD_BUILD_ROOT}/variants/feather_m0")
 set(TOOLCHAIN_DIR "${CMAKE_CURRENT_LIST_DIR}")
 
 # Include Paths
-set(INCLUDE_PATHS "-I${ARDUINO_CORE} -I${VARIANT_ROOT_PATH} -I${CMSIS_ROOT_PATH}/Include -I${CMSIS_ATMEL_ROOT_PATH}")
+set(INCLUDE_PATHS "-I${ARDUINO_CORE}  -I${VARIANT_ROOT_PATH} -I${CMSIS_ROOT_PATH}/Include -I${CMSIS_ATMEL_ROOT_PATH}")
+# New USB implementation requires additional includes.
+set(INCLUDE_PATHS "${INCLUDE_PATHS} -I${ARDUINO_CORE}/Adafruit_TinyUSB_Core -I${ARDUINO_CORE}/Adafruit_TinyUSB_Core/tinyusb/src")
 set(INCLUDE_PATHS "${INCLUDE_PATHS} -I${CMSIS_ATMEL_ROOT_PATH}/${MCU_NAME}/include")
 
 # Collect flags

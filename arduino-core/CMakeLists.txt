@@ -46,3 +46,6 @@ file(GLOB_RECURSE ARDUINO_CORE_FILES
 
 # Create a static library from all this files.
 add_library(arduino-core STATIC ${ARDUINO_CORE_FILES})
+
+# Supress warnings of the core files.
+set_target_properties(arduino-core PROPERTIES COMPILE_FLAGS "-Wno-unused-variable")

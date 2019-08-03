@@ -43,7 +43,7 @@ set(OPTIMIZATION_FLAGS "-Os")
 set(WARNING_FLAGS "-Wall -Wno-unknown-pragmas")
 set(CPU_TARGET_FLAGS "-mcpu=${CPU_TARGET} -m${CPU_INST}")
 set(MORE_FLAGS "-ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500")
-set(CXX_FLAGS "-std=gnu++11 -fno-threadsafe-statics -fno-rtti -fno-exceptions")
+set(CXX_FLAGS "-std=gnu++11 -fno-threadsafe-statics -fno-rtti -fno-exceptions -Wno-register")
 set(C_FLAGS "-std=gnu11")
 
 # Set some flags for the C++ compiler.

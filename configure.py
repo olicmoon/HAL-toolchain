@@ -89,7 +89,7 @@ BUILD_PATHS = [
     BuildPath(
         name='Adafruit SAMD Boards',
         cmake_name='SAMD_BUILD_ROOT',
-        minimum_version=Version('1.4.1'),
+        minimum_version=Version('1.5.2'),
         package_path=Path('adafruit/hardware/samd')),
     BuildPath(
         name='ARM GCC Compiler',

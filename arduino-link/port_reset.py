@@ -48,11 +48,11 @@ def reset(port: str):
         # Configure / 1200 baud
         termios.tcsetattr(fd, termios.TCSANOW, [iflag, oflag, cflag, lflag, 1200, 1200, cc])
         # Wait
-        time.sleep(1)
+        time.sleep(2)
         # Close
         os.close(fd)
         # Wait again.
-        time.sleep(2)
+        time.sleep(3)
     except FileNotFoundError:
         exit(f"Could not find port '{port}'.")
     except termios.error:

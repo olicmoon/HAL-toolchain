@@ -95,6 +95,7 @@ BUILD_PATHS = [
         name='ARM GCC Compiler',
         cmake_name='APP_TOOLS_PATH',
         minimum_version=Version('4.8.3-2014q1'),
+        maximum_version=Version('4.8.3-2014q1'),
         package_path=Path('arduino/tools/arm-none-eabi-gcc'),
         path_suffix=Path('bin')
     ),

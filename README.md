@@ -7,15 +7,14 @@ Adafruit Feather M0
 -------------------
 Make sure you have all prerequisites:
 
-- Install the Arduino IDE, version 1.8.9 or later.
-- Install the "Adafruit SAMD Boards" package.
-- Install the "Arduino SAMD Boards" package.
+- Install the latest "Arm GNU Toolchain for 32-bit Devices" from [Microchip](https://www.microchip.com/mplab/avr-support/avr-and-arm-toolchains-c-compilers). This should me minimum version 6.3.1. Copy the `arm-none-eabi` directory to any suitable location on your system. Do not install it into your systems `\usr\bin` or `\usr\local\bin` directory.  
+- Install `BOSSA` from [here](https://github.com/shumatech/BOSSA/releases). Install this into the recommended location `/usr/local/bin`.
 - Install CMake version 3.14 or later.
 - Install Python version 3.7 or later.
 
 Prepare a project for using the configuration script
 
-- Run `python3 configure.py` to create the `feather-m0-config.cmake` file. The script will scan your system for correct paths used for the toolchain.
+- Run `python3 configure.py -c <path to compiler dir>` to create the `feather-m0-config.cmake` file. The script will scan your system for correct paths used for the toolchain.
 - Update the `UPLOAD_PORT` in the `CMakeLists.txt` of the project root directory.
 
 Create the build environment:
@@ -66,7 +65,7 @@ This library is a work in progress. It is published merely as an inspiration and
 
 License
 -------
-Copyright 2019 by Lucky Resistor.
+Copyright (c)2019 by Lucky Resistor.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

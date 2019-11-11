@@ -53,15 +53,22 @@ function(arm_gcc_link TARGET)
     add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD COMMAND "${TOOL_OBJCOPY}" ARGS "-O" "binary"
             "$<TARGET_FILE_NAME:${FIRMWARE_TARGET}>" "$<TARGET_FILE_NAME:${FIRMWARE_TARGET}>.bin"
             WORKING_DIRECTORY "$<TARGET_FILE_DIR:${FIRMWARE_TARGET}>")
-    add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD COMMAND "${TOOL_SIZE}" ARGS "-A" "-x"
+    add_custom_command(TARGET ${FIRMWARE_TARGET} POST_BUILD COMMAND "${PYTHON3_PATH}" ARGS
+            "${TOOLCHAIN_DIR}/size.py"
+            "-s=${FLASH_SIZE}"
+            "-b=${FLASH_START}"
+            "-r=${RAM_SIZE}"
+            "-t=${TOOL_SIZE}"
             "$<TARGET_FILE_NAME:${FIRMWARE_TARGET}>"
             WORKING_DIRECTORY "$<TARGET_FILE_DIR:${FIRMWARE_TARGET}>")
     # Add the intsllation script to upload the firmware.
     install(CODE "execute_process(COMMAND
-        ${CMAKE_COMMAND}
-        \"-DUPLOAD_PORT=${UPLOAD_PORT}\"
-        \"-DFIRMWARE=$<TARGET_FILE:${FIRMWARE_TARGET}>.bin\"
-        \"-DBOSSAC=${BOSSAC_PATH}\"
-        -P \"${TOOLCHAIN_DIR}/arm-gcc-link/upload.cmake\")")
+        \"${PYTHON3_PATH}\" \"${TOOLCHAIN_DIR}/upload.py\"
+        \"-r\" \"-u\"
+        \"-p=${UPLOAD_PORT}\"
+        \"-f=$<TARGET_FILE:${FIRMWARE_TARGET}>.bin\"
+        \"-t=bossac\"
+        \"-x=${BOSSAC_PATH}\"
+        \"-b=${FLASH_START}\")")
 endfunction()
 

@@ -35,10 +35,14 @@ TARGET_MCU_VARIANT = 'SAMD21G18A'
 TARGET_CPU_TYPE = 'cortex-m0plus'
 TARGET_CPU_INSTRUCTIONS = 'thumb'
 CONFIG_FILE = 'configuration.cmake'
+FLASH_SIZE = 0x00040000
+FLASH_START = 0x00002000
+RAM_SIZE = 0x00008000
 
 BIN_DIRS = [Path('/usr/bin'), Path('/usr/local/bin')]
 COMPILER_NAME = 'arm-none-eabi-gcc'
 BOSSAC_NAME = 'bossac'
+PYTHON3_PATH = sys.executable
 
 
 class Error(Exception):
@@ -174,6 +178,10 @@ def write_config():
         'CPU_INST': TARGET_CPU_INSTRUCTIONS.lower(),
         'APP_TOOLS_PATH': str(config.compiler_path),
         'BOSSAC_PATH': str(config.bossac_path),
+        'PYTHON3_PATH': str(PYTHON3_PATH),
+        'FLASH_SIZE': f'{FLASH_SIZE:#010x}',
+        'FLASH_START': f'{FLASH_START:#010x}',
+        'RAM_SIZE': f'{RAM_SIZE:#010x}',
     }
     if config.verbose:
         print(' - Configuration:')

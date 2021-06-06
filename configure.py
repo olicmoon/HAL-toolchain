@@ -115,7 +115,7 @@ def scan_compiler():
     if compiler_version < COMPILER_MIN_VERSION:
         raise Error(f'Found compiler version {compiler_version}, but minimum version '
                     f'{COMPILER_MIN_VERSION} is required.')
-    config.compiler_path = compiler_path/'bin'
+    config.compiler_path = compiler_path
     if config.verbose:
         print(f'Found compiler version {compiler_version} here: {config.compiler_path}')
 

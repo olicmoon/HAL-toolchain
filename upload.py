@@ -86,7 +86,9 @@ def reset(port: str):
         oflag &= ~(termios.OPOST | termios.ONLCR | termios.OCRNL)
         iflag &= ~(termios.INLCR | termios.IGNCR | termios.ICRNL | termios.IGNBRK | termios.INPCK | termios.ISTRIP)
         # Configure / 1200 baud
-        termios.tcsetattr(fd, termios.TCSANOW, [iflag, oflag, cflag, lflag, 1200, 1200, cc])
+        print(f'updating attr {port} {ispeed} {ospeed}')
+        custom_baud = termios.B1200
+        termios.tcsetattr(fd, termios.TCSANOW, [iflag, oflag, cflag, lflag, custom_baud, custom_baud, cc])
         # Wait
         print('Wait 2 seconds...')
         time.sleep(2)
@@ -97,8 +99,8 @@ def reset(port: str):
         time.sleep(4)
     except FileNotFoundError:
         exit(f"Could not find port '{port}'.")
-    except termios.error:
-        exit(f"The path '{port}' is no USB serial line.")
+    except termios.error as e:
+        exit(f"The path '{port}' is no USB serial line: {e}")
 
 
 def upload(port: str, firmware: str, tool: str, tool_path: str, flash_start: int):

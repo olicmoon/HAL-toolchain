@@ -93,7 +93,7 @@ def scan_compiler():
     if not compiler_path:
         raise Error('Could not find the ARM compiler in your path. Please specify the compiler directory using '
                     'the -c command line argument.')
-    compiler_bin = compiler_path/'bin'/COMPILER_NAME
+    compiler_bin = compiler_path/COMPILER_NAME
     args = [str(compiler_bin), '--version']
     if config.verbose:
         print(f'Checking compiler version: {" ".join(args)}')
